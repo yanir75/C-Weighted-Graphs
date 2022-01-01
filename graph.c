@@ -193,6 +193,52 @@ void print(node *head){
         head=head->next;
     }
 }
+void delete_edges(node *head, int id){
+    node *tmp = head;
+    while(tmp!=NULL){
+        edge *e =tmp->edges;
+        if(e!=NULL)
+        {
+            if(e!=NULL && e->dest->id ==id){
+                tmp->edges=tmp->edges->next_edge;
+                free(e);
+            }
+            else{
+                while(e->next_edge!=NULL){
+                    if(e->next_edge->dest->id==id)
+                    {
+                        edge *tmp_edge = e->next_edge;
+                        e->next_edge=tmp_edge->next_edge;
+                        free(tmp_edge);
+                    }
+                    e=e->next_edge;
+                }
+        }
+        }
+        tmp=tmp->next;
+    }
+}
+node *delete(node *head ,int id){
+    delete_edges(head,id);
+    if(head->id==id){
+        node *tmp=head->next;
+        free(head);
+        return tmp;
+    }
+    node *tmp=head;
+    while(tmp->next!=NULL){
+        if(tmp->next->id==id)
+        {
+            node *deleted = tmp->next;
+            tmp->next=deleted->next;
+            free_edges(deleted);
+            free(deleted);
+            return head;
+        }
+        tmp=tmp->next;
+    }
+    
+}
 
 int main()
 {
@@ -208,6 +254,12 @@ int main()
         if(ch=='B')
         {
             head=add(head);
+        }
+        if(ch=='D')
+        {
+            int id;
+            scanf(" %d",&id);
+            head=delete(head,id);
             print(head);
         }
         scanf(" %c",&ch);
