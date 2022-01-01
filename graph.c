@@ -13,6 +13,10 @@ typedef struct node{
     edge *edges;
 }node;
 
+typedef struct prio{
+    int id;
+    int weight;
+}prio;
 
 node* allocate_graph(int num)
 {
@@ -54,6 +58,19 @@ node* get(node *head,int num){
     }
     return tmp;
 }
+
+node* get_id(node *head,int num){
+    node *tmp =head;
+    int i=0;
+    while(tmp!=NULL)
+    {
+        if(tmp->id==num){
+            return tmp;
+        }
+        tmp=tmp->next;
+    }
+    return tmp;
+}
 //free  the memory of the edges
 void free_edges(node *head){
     edge *e=head->edges;
@@ -63,6 +80,31 @@ void free_edges(node *head){
         tmp=tmp->next_edge;
         free(e);
     }
+}
+
+int count_edges(node *head){
+    int count=0;
+    node *t =head;
+    while(t!=NULL){
+    edge *e=t->edges;
+    edge *tmp=e;
+    while(tmp!=NULL){
+        count++;
+        e=tmp;
+        tmp=tmp->next_edge;
+    }
+    t=t->next;
+    }
+    return count;
+}
+int count_nodes(node *head){
+    int count=0;
+    node *t =head;
+    while(t!=NULL){
+        count++;
+        t=t->next;
+    }
+    return count;
 }
 void free_list(node *head){
     node *tmp=head;
@@ -133,6 +175,8 @@ node *add(node *head){
         }
         return head;
 }
+
+
 
 node* load_graph(char *ch_copy,node *f){
     if(f!=NULL){
@@ -237,6 +281,33 @@ node *delete(node *head ,int id){
         }
         tmp=tmp->next;
     }
+    
+}
+void vis(node *head, int *visited)
+{   int i=0;
+    node *t = head;
+    while(t!=NULL)
+    {
+        visited[i]=t->id;
+    }
+}
+void add_pr(prio *arr,prio p){
+}
+
+int djikstra(node *head,int src,int dest){
+    int numOfNodes=count_nodes(head);
+    int numOfEdges=count_edges(head);
+    
+    prio *pr =(prio *)malloc(sizeof(prio)*numOfEdges);
+    if(pr==NULL){
+        exit(1);
+    }
+    int *visited = (int*)malloc(sizeof(int)*numOfNodes);
+    if(visited==NULL){
+        exit(1);
+    }
+    vis(head,visited);
+    
     
 }
 
