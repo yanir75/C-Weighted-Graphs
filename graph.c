@@ -75,7 +75,7 @@ void free_list(node *head){
 }
 
 // adds a node 
-void add(node *head){
+node *add(node *head){
         int i;
         scanf("%d",&i);
         node *added = (node*)malloc(sizeof(node));
@@ -87,9 +87,6 @@ void add(node *head){
         added->next=NULL;
         added->id=i;
         node *tmp=head;
-        while(tmp->next!=NULL && tmp->next->id!=added->id){
-            tmp=tmp->next;
-        }
         edge *e=NULL;
         while(scanf("%d",&i)){
             if(e==NULL){
@@ -110,7 +107,19 @@ void add(node *head){
             scanf("%d",&i);
             e->weight=i;
             e->next_edge=NULL;
-        }   
+        } 
+        if(head->id==added->id)
+        {
+            added->next=head->next;
+            free_edges(head);
+            free(head);
+            head=added;
+            return head;
+        }
+        else {
+        while(tmp->next!=NULL && tmp->next->id!=added->id){
+            tmp=tmp->next;
+        }
         if(tmp->next==NULL){
             tmp->next=added;
         }
@@ -121,6 +130,8 @@ void add(node *head){
                 free_edges(deleted);
                 free(deleted);
         }
+        }
+        return head;
 }
 
 node* load_graph(char *ch_copy,node *f){
@@ -188,17 +199,17 @@ int main()
     char ch;
     scanf(" %c",&ch);
     node *head=NULL;
-    while(ch!= EOF){
+    while(ch!= 'k'){
         // receiving a graph
-        if(ch='A'){
+        if(ch=='A'){
             head = load_graph(&ch,head);
             print(head);
         }
-        if(ch='B')
+        if(ch=='B')
         {
-            add(head);
+            head=add(head);
             print(head);
         }
-        
+        scanf(" %c",&ch);
     }
 }
