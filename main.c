@@ -459,7 +459,7 @@ int main()
 {
     char ch;
     node *head=NULL;
-    while(scanf(" %c",&ch)){
+    while(scanf(" %c",&ch)!=EOF){
         // receiving a graph
         if(ch=='A'){
             head = load_graph(&ch,head);
