@@ -97,7 +97,7 @@ priorityQueue *pop(priorityQueue *queue ,int arr[]){
 }
 priorityQueue *add_prio(priorityQueue *queue,node *info,int prio){
     if(queue==NULL){
-        queue=(priorityQueue*)malloc(sizeof(queue));
+        queue=(priorityQueue*)malloc(sizeof(priorityQueue));
         queue->info=info;
         queue->prio=prio;
         queue->next=NULL;
