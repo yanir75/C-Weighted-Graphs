@@ -430,7 +430,7 @@ int check_route(node *head,int *arr,int size){
 void swap(int *arr,int i,int j){
     int tmp =arr[i];
     arr[i]=arr[j];
-    arr[j]=arr[i];
+    arr[j]=tmp;
 }
 int *TSP(node *head,int *arr,int start,int end,int size,int *max){
     int i;
@@ -440,7 +440,7 @@ int *TSP(node *head,int *arr,int start,int end,int size,int *max){
         }
         else
         {int m=check_route(head,arr,size);
-        if(m<*max){
+        if(m<*max && m!=-1){
             *max=m;
         }
         }
