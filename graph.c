@@ -50,6 +50,7 @@ list *add_list(list *l,int id,int weight){
     li->id=id;
     li->weight=weight;
     tmp->next=li;
+    return l;
 }
 void free_li(list *l){
         list *tmp=l;
@@ -68,17 +69,20 @@ int isNotEmpty(priorityQueue *queue){
         return 1;
     }
 }
-int *pop(priorityQueue *queue){
-    int *arr={queue->id,queue->weight};
+priorityQueue *pop(priorityQueue *queue ,int arr[]){
+    arr[0]=queue->info->id;
+    arr[1]=queue->prio;
     if(queue->next==NULL)
     {
-        queue=NULL;
+        free(queue);
+        priorityQueue *tmp=NULL;
+        return tmp;
     }
     else{
-     queue=queue->next;   
+        priorityQueue *tmp= queue->next;
+        free(queue);
+        return tmp;   
     }
-    tmp->next=NULL;
-    return tmp;
 }
 priorityQueue *add_prio(priorityQueue *queue,node *info,int prio){
     if(queue==NULL){
@@ -91,6 +95,7 @@ priorityQueue *add_prio(priorityQueue *queue,node *info,int prio){
     else if(queue->prio>prio){
         priorityQueue *q =(priorityQueue*)malloc(sizeof(priorityQueue));
         q->info=info;
+        q->prio=prio;
         q->next=queue;
         return q;
     }
@@ -374,22 +379,22 @@ int djikstra(node *head,int src,int dest){
   priorityQueue *queue=NULL;
   queue=add_prio(queue,get_id(head,src),0);
   while(isNotEmpty(queue)){
-      int *arr = pop(queue);
-      int weight=arr[1];
+      int arr[2];
+      queue = pop(queue,arr);
       int id =arr[0];
       node *n=get_id(head,id);
       if(!contains(li,id)){
-          add_list(li,id,weight);
+          li=add_list(li,id,arr[1]);
           if(id==dest){
               free_li(li);
               free_prio(queue);
-              printf("%d",weight);
-              return weight;
+              printf("%d",arr[1]);
+              return arr[1];
           }
           edge * e = n->edges;
           while(e!=NULL){
-              weight=weight+e->weight;
-              add_prio(queue,e->dest,weight);
+              int weight=arr[1]+e->weight;
+              queue=add_prio(queue,e->dest,weight);
               e=e->next_edge;
           }
       }
