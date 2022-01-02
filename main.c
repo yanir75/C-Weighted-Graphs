@@ -458,9 +458,8 @@ int *TSP(node *head,int *arr,int start,int end,int size,int *max){
 int main()
 {
     char ch;
-    scanf(" %c",&ch);
     node *head=NULL;
-    while(ch!= EOF){
+    while(scanf(" %c",&ch)){
         // receiving a graph
         if(ch=='A'){
             head = load_graph(&ch,head);
@@ -506,7 +505,6 @@ int main()
             free(arr);
             printf("TSP shortest path: %d\n",*max);
         }
-        scanf(" %c",&ch);
     }
     free_list(head);
     return 0;
