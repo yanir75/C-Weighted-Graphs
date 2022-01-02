@@ -1,6 +1,6 @@
-all: main.o
-main.o: 
-	gcc -Wall -g main.c -o main.o
+all: graph
+graph: 
+	gcc -Wall -g main.c -o graph
 .PHONY: clean all
 
 clean:
