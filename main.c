@@ -24,7 +24,19 @@ typedef struct list{
     int weight;
     struct list *next;
 }list;
-
+void print(node *head){
+    while(head!=NULL){
+        int id = head->id;
+        printf("Node: %d\n  edges:\n    {",head->id);
+        edge *e = head->edges;
+        while(e!=NULL){
+            printf("dest: %d, weight: %d",e->dest->id,e->weight);
+            e=e->next_edge;
+        }
+        printf("}\n");
+        head=head->next;
+    }
+}
 int contains(list * l,int id){
     list *tmp=l;
     while(tmp!=NULL){
@@ -164,7 +176,7 @@ node* get(node *head,int num){
         i++;
         tmp=tmp->next;
     }
-    if(i<num)
+    if(i>num)
     {
         return NULL;
     }
@@ -238,12 +250,14 @@ node *add(node *head){
             e->weight=i;
             e->next_edge=NULL;
         } 
+        print(added);
         if(head->id==added->id)
         {
-            added->next=head->next;
+            //added->next=head->next;
             free_edges(head);
-            free(head);
-            head=added;
+            head->edges=added->edges;
+            //free(head);
+            free(added);
             return head;
         }
         else {
@@ -256,9 +270,9 @@ node *add(node *head){
         else{
                 node *deleted = tmp->next;
                 added->next=deleted->next;
-                tmp->next=added;
-                free_edges(deleted);
-                free(deleted);
+                free_edges(tmp->next);
+                tmp->next->edges=added->edges;
+                free(added);
         }
         }
         return head;
@@ -312,19 +326,6 @@ node* load_graph(char *ch_copy,node *f){
     
 }
 
-void print(node *head){
-    while(head!=NULL){
-        int id = head->id;
-        printf("Node: %d\n  edges:\n    {",head->id);
-        edge *e = head->edges;
-        while(e!=NULL){
-            printf("dest: %d, weight: %d",e->dest->id,e->weight);
-            e=e->next_edge;
-        }
-        printf("}\n");
-        head=head->next;
-    }
-}
 void delete_edges(node *head, int id){
     node *tmp = head;
     while(tmp!=NULL){
