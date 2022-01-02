@@ -403,9 +403,56 @@ int djikstra(node *head,int src,int dest){
   free_prio(queue);
   printf("-1");
   return -1;
-  
-    
-    
+}
+int get_list(list *nodes,int num){
+    int i=0;
+    list *tmp=nodes;
+    while(i<num){
+        i++;
+        tmp=tmp->next;
+    }
+    return tmp->id;
+}
+int check_route(node *head,int *arr,int size){
+    int j=0;
+    int sum=0;
+    for(int i=0;i<size-1;i++){
+        int j=djikstra(head,arr[i],arr[i+1]);
+        if(j!=-1){
+            sum=sum+j;
+        }
+        else{
+            return -1;
+        }
+    }
+    return sum;
+}
+void swap(int *arr,int i,int j){
+    int tmp =arr[i];
+    arr[i]=arr[j];
+    arr[j]=arr[i];
+}
+int *TSP(node *head,int *arr,int start,int end,int size,int *max){
+    int i;
+    if(start==end){
+        if(*max==-1){
+            *max=check_route(head,arr,size);
+        }
+        else
+        {int m=check_route(head,arr,size);
+        if(m<*max){
+            *max=m;
+        }
+        }
+    }
+    else{
+        for(i=start;i<=end;i++){
+            swap(arr,start,i);
+            TSP(head,arr,start+1,end,size,max);
+            swap(arr,start,i);
+        }
+    }
+    return max;
 }
 
 int main()
@@ -434,6 +481,25 @@ int main()
             scanf(" %d%d",&src,&dest);
             djikstra(head,src,dest);
         }
+        if(ch=='T')
+        {
+            list *x=NULL;
+            int i;
+            int count=0;
+            while(scanf(" %d",&i)){
+                x=add_list(x,i,0);
+                count++;
+            }
+            int *arr = (int*)malloc(sizeof(int)*count);
+            for(int i=0;i<count;i++){
+                arr[i]=get_list(x,i);
+            }
+            free_li(x);
+            int *max;
+            *max=-1;
+            TSP(head,arr,0,count-1,count,max);
+        }
         scanf(" %c",&ch);
     }
+    free_list(head);
 }
