@@ -26,7 +26,6 @@ typedef struct list{
 }list;
 void print(node *head){
     while(head!=NULL){
-        int id = head->id;
         printf("Node: %d\n  edges:\n    {",head->id);
         edge *e = head->edges;
         while(e!=NULL){
@@ -185,7 +184,6 @@ node* get(node *head,int num){
 
 node* get_id(node *head,int num){
     node *tmp =head;
-    int i=0;
     while(tmp!=NULL)
     {
         if(tmp->id==num){
@@ -372,7 +370,7 @@ node *delete(node *head ,int id){
         }
         tmp=tmp->next;
     }
-    
+    return NULL;
 }
 
 
@@ -417,7 +415,6 @@ int get_list(list *nodes,int num){
     return tmp->id;
 }
 int check_route(node *head,int *arr,int size){
-    int j=0;
     int sum=0;
     for(int i=0;i<size-1;i++){
         int j=djikstra(head,arr[i],arr[i+1]);
