@@ -486,18 +486,22 @@ int main()
         }
         if(ch=='T')
         {
-            list *x=NULL;
-            int i;
-            int count=0;
-            while(scanf(" %d",&i)){
-                x=add_list(x,i,0);
-                count++;
-            }
+            // list *x=NULL;
+            // int i;
+            int count;
+            // while(scanf(" %d",&i)){
+            //     x=add_list(x,i,0);
+            //     count++;
+            // }
+            scanf(" %d",&count);
             int *arr = (int*)malloc(sizeof(int)*count);
             for(int i=0;i<count;i++){
-                arr[i]=get_list(x,i);
+                int id;
+                scanf(" %d",&id);
+                node *n=get_id(head,id);
+                arr[i]=n->id;
             }
-            free_li(x);
+            //free_li(x);
             int *max;
             int k=-1;
             max=&k;
