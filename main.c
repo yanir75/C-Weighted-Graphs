@@ -479,7 +479,7 @@ int main()
             int src,dest;
             scanf(" %d%d",&src,&dest);
             int weight=djikstra(head,src,dest);
-            printf("Dijsktra shortest path: %d\n",weight);
+            printf("Dijsktra shortest path: %d\n ",weight);
         }
         if(ch=='T')
         {
@@ -503,7 +503,7 @@ int main()
             max=&k;
             TSP(head,arr,0,count-1,count,max);
             free(arr);
-            printf("TSP shortest path: %d\n",*max);
+            printf("TSP shortest path: %d\n ",*max);
         }
     }
     free_list(head);
