@@ -487,9 +487,6 @@ int main()
             int i;
             int count=0;
             while(scanf(" %d",&i)){
-                if(contains(x,i)){
-                break;
-                }
                 x=add_list(x,i,0);
                 count++;
             }
