@@ -388,7 +388,7 @@ int djikstra(node *head,int src,int dest){
           if(id==dest){
               free_li(li);
               free_prio(queue);
-              printf("%d",arr[1]);
+              //printf("%d\n",arr[1]);
               return arr[1];
           }
           edge * e = n->edges;
@@ -401,7 +401,7 @@ int djikstra(node *head,int src,int dest){
   }
   free_li(li);
   free_prio(queue);
-  printf("-1");
+  //printf("-1");
   return -1;
 }
 int get_list(list *nodes,int num){
@@ -479,7 +479,8 @@ int main()
         {
             int src,dest;
             scanf(" %d%d",&src,&dest);
-            djikstra(head,src,dest);
+            int weight=djikstra(head,src,dest);
+            printf("Dijsktra shortest path: %d\n",weight);
         }
         if(ch=='T')
         {
@@ -498,6 +499,8 @@ int main()
             int *max;
             *max=-1;
             TSP(head,arr,0,count-1,count,max);
+            free(arr);
+            printf("TSP shortest path: %d\n",*max);
         }
         scanf(" %c",&ch);
     }
