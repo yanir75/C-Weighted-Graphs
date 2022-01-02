@@ -144,7 +144,7 @@ void free_prio(priorityQueue *prio){
 node* allocate_graph(int num)
 {
     // allocates the node list
-    node *head = (node*)malloc(sizeof(num));
+    node *head = (node*)malloc(sizeof(node));
     if(head==NULL)
     {
         exit(1);
@@ -153,7 +153,7 @@ node* allocate_graph(int num)
     for(int i=0;i<num-1;i++){
         tmp->id=i;
         tmp->edges=NULL;
-        node *n = (node*)malloc(sizeof(num));
+        node *n = (node*)malloc(sizeof(node));
         if(n==NULL){
             exit(1);
         }
