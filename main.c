@@ -505,4 +505,5 @@ int main()
         scanf(" %c",&ch);
     }
     free_list(head);
+    return 0;
 }
