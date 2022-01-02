@@ -1,8 +1,6 @@
 all: main.o
-
-main.o:
-	gcc -o main.o main.c
-
+main.o: 
+	gcc -Wall -g main.c -o main.o
 .PHONY: clean all
 
 clean:
