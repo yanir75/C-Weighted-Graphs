@@ -250,7 +250,7 @@ node *add(node *head){
             e->weight=i;
             e->next_edge=NULL;
         } 
-        print(added);
+        // print(added);
         if(head->id==added->id)
         {
             //added->next=head->next;
