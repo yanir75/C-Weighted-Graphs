@@ -344,7 +344,9 @@ void delete_edges(node *head, int id){
                         e->next_edge=tmp_edge->next_edge;
                         free(tmp_edge);
                     }
+                    if(e->next_edge!=NULL){
                     e=e->next_edge;
+                    }
                 }
         }
         }
