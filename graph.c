@@ -13,10 +13,117 @@ typedef struct node{
     edge *edges;
 }node;
 
-typedef struct prio{
+typedef struct queue{
+    int prio;
+    node *info;
+    struct queue *next;
+}priorityQueue;
+
+typedef struct list{
     int id;
     int weight;
-}prio;
+    struct list *next;
+}list;
+
+int contains(list * l,int id){
+    list *tmp=l;
+    while(tmp!=NULL){
+        if(tmp->id==id){
+            return 1;
+        }
+        tmp=tmp->next;
+    }
+    return 0;
+}
+list *add_list(list *l,int id,int weight){
+    if(l==NULL){
+        l=(list*)malloc(sizeof(list));
+        l->id=id;
+        l->weight=weight;
+        return l;
+    }
+    list *tmp=l;
+    while(tmp->next!=NULL){
+        tmp=tmp->next;
+    }
+    list *li=(list*)malloc(sizeof(list));
+    li->id=id;
+    li->weight=weight;
+    tmp->next=li;
+}
+void free_li(list *l){
+        list *tmp=l;
+    while(l!=NULL){
+        tmp=l->next;
+        free(l);
+        l=tmp;
+    }
+}
+
+int isNotEmpty(priorityQueue *queue){
+    if(queue==NULL){
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+int *pop(priorityQueue *queue){
+    int *arr={queue->id,queue->weight};
+    if(queue->next==NULL)
+    {
+        queue=NULL;
+    }
+    else{
+     queue=queue->next;   
+    }
+    tmp->next=NULL;
+    return tmp;
+}
+priorityQueue *add_prio(priorityQueue *queue,node *info,int prio){
+    if(queue==NULL){
+        queue=(priorityQueue*)malloc(sizeof(queue));
+        queue->info=info;
+        queue->prio=prio;
+        queue->next=NULL;
+        return queue;
+    }
+    else if(queue->prio>prio){
+        priorityQueue *q =(priorityQueue*)malloc(sizeof(priorityQueue));
+        q->info=info;
+        q->next=queue;
+        return q;
+    }
+    else{
+        priorityQueue *tmp=queue;
+        while(tmp->next!=NULL && tmp->next->prio<prio){
+            tmp=tmp->next;
+        }
+        if(tmp->next==NULL){
+            priorityQueue *q = (priorityQueue*)malloc(sizeof(priorityQueue));
+            q->next=NULL;
+            q->prio=prio;
+            q->info=info;
+            return queue;
+        }
+        else{
+            priorityQueue *q = (priorityQueue*)malloc(sizeof(priorityQueue));
+            q->next=tmp->next;
+            q->info=info;
+            q->prio=prio;
+            tmp->next=q;
+            return queue;
+        }
+    }
+}
+void free_prio(priorityQueue *prio){
+    priorityQueue *tmp=prio;
+    while(prio!=NULL){
+        tmp=prio->next;
+        free(prio);
+        prio=tmp;
+    }
+}
 
 node* allocate_graph(int num)
 {
@@ -82,30 +189,6 @@ void free_edges(node *head){
     }
 }
 
-int count_edges(node *head){
-    int count=0;
-    node *t =head;
-    while(t!=NULL){
-    edge *e=t->edges;
-    edge *tmp=e;
-    while(tmp!=NULL){
-        count++;
-        e=tmp;
-        tmp=tmp->next_edge;
-    }
-    t=t->next;
-    }
-    return count;
-}
-int count_nodes(node *head){
-    int count=0;
-    node *t =head;
-    while(t!=NULL){
-        count++;
-        t=t->next;
-    }
-    return count;
-}
 void free_list(node *head){
     node *tmp=head;
     while(tmp!=NULL){
@@ -283,30 +366,39 @@ node *delete(node *head ,int id){
     }
     
 }
-void vis(node *head, int *visited)
-{   int i=0;
-    node *t = head;
-    while(t!=NULL)
-    {
-        visited[i]=t->id;
-    }
-}
-void add_pr(prio *arr,prio p){
-}
+
+
 
 int djikstra(node *head,int src,int dest){
-    int numOfNodes=count_nodes(head);
-    int numOfEdges=count_edges(head);
-    
-    prio *pr =(prio *)malloc(sizeof(prio)*numOfEdges);
-    if(pr==NULL){
-        exit(1);
-    }
-    int *visited = (int*)malloc(sizeof(int)*numOfNodes);
-    if(visited==NULL){
-        exit(1);
-    }
-    vis(head,visited);
+  list *li=NULL;
+  priorityQueue *queue=NULL;
+  queue=add_prio(queue,get_id(head,src),0);
+  while(isNotEmpty(queue)){
+      int *arr = pop(queue);
+      int weight=arr[1];
+      int id =arr[0];
+      node *n=get_id(head,id);
+      if(!contains(li,id)){
+          add_list(li,id,weight);
+          if(id==dest){
+              free_li(li);
+              free_prio(queue);
+              printf("%d",weight);
+              return weight;
+          }
+          edge * e = n->edges;
+          while(e!=NULL){
+              weight=weight+e->weight;
+              add_prio(queue,e->dest,weight);
+              e=e->next_edge;
+          }
+      }
+  }
+  free_li(li);
+  free_prio(queue);
+  printf("-1");
+  return -1;
+  
     
     
 }
@@ -320,7 +412,6 @@ int main()
         // receiving a graph
         if(ch=='A'){
             head = load_graph(&ch,head);
-            print(head);
         }
         if(ch=='B')
         {
@@ -331,7 +422,12 @@ int main()
             int id;
             scanf(" %d",&id);
             head=delete(head,id);
-            print(head);
+        }
+        if(ch=='S')
+        {
+            int src,dest;
+            scanf(" %d%d",&src,&dest);
+            djikstra(head,src,dest);
         }
         scanf(" %c",&ch);
     }
