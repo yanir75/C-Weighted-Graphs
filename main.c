@@ -120,6 +120,7 @@ priorityQueue *add_prio(priorityQueue *queue,node *info,int prio){
             q->next=NULL;
             q->prio=prio;
             q->info=info;
+            tmp->next=q;
             return queue;
         }
         else{
