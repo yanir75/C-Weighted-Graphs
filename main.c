@@ -38,7 +38,7 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    list *tmp=(tmp*)malloc(sizeof(list));
+    list *tmp=(list*)malloc(sizeof(list));
     list *t1=tmp;
     tmp=l;
     while(tmp!=NULL){
