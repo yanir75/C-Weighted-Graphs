@@ -381,12 +381,12 @@ int djikstra(node *head,int src,int dest){
   int c=1;
   priorityQueue *queue=NULL;
   queue=add_prio(queue,get_id(head,src),0);
+    li->id=src;
   while(isNotEmpty(queue)){
       int arr[2];
       queue = pop(queue,arr);
       int id =arr[0];
       node *n=get_id(head,id);
-      list->id=id;
       if(!contains(li,id)||c){
           if(c==0){
           li=add_list(li,id,arr[1]);
