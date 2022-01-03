@@ -37,7 +37,9 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    list *tmp=l;
+    list *tmp;
+    memset(tmp,0,sizeof(list));
+    tmp=l;
     while(tmp){
         if(tmp->id==id){
             return 1;
