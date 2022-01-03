@@ -64,11 +64,10 @@ list *add_list(list *l,int id,int weight){
     return l;
 }
 void free_li(list *l){
-        list *tmp=l;
-    while(l!=NULL){
+    while(tmp!=NULL){
+        l=tmp;
         tmp=l->next;
         free(l);
-        l=tmp;
     }
 }
 
