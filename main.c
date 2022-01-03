@@ -37,7 +37,7 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    if(l==NULL{
+    if(l==NULL){
         return 0;
     }
        else{
