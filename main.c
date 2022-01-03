@@ -37,14 +37,12 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    if(l!=NULL){
     list *tmp=l;
-    while(tmp!=NULL){
+    while(tmp){
         if(tmp->id==id){
             return 1;
         }
         tmp=tmp->next;
-    }
     }
     return 0;
 }
