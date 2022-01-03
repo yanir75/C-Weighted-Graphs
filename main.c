@@ -36,46 +36,17 @@ void print(node *head){
         head=head->next;
     }
 }
-int contains(list * l,int id){
-    if(l==NULL){
-        return 0;
-    }
-       else{
-    list *tmp=l;
-    while(tmp!=NULL){
-        if(tmp->id==id){
+int contains(int *arr,int size,int id){
+    for(int i=0;i<size;i++){
+        if(arr[i]==id){
             return 1;
         }
-        tmp=tmp->next;
     }
     return 0;
-       }
+       
 }
-list *add_list(list *l,int id,int weight){
-    if(l==NULL){
-        l=(list*)malloc(sizeof(list));
-        l->id=id;
-        l->weight=weight;
-        return l;
-    }
-    list *tmp=l;
-    while(tmp->next!=NULL){
-        tmp=tmp->next;
-    }
-    list *li=(list*)malloc(sizeof(list));
-    li->id=id;
-    li->weight=weight;
-    tmp->next=li;
-    return l;
-}
-void free_li(list *l){
-    list *tmp=l;
-    while(tmp!=NULL){
-        l=tmp;
-        tmp=l->next;
-        free(l);
-    }
-}
+
+
 
 int isNotEmpty(priorityQueue *queue){
     if(queue==NULL){
@@ -379,26 +350,37 @@ node *delete(node *head ,int id){
     return NULL;
 }
 
-
+int count_nodes(node *head){
+    node *tmp =head;
+    int count=0;
+    if(tmp==NULL){
+        return 0;
+    }
+    else{
+        while(tmp!=NULL){
+            tmp=tmp->next;
+            count++;
+        }
+        return count;
+    }
+}
 
 int djikstra(node *head,int src,int dest){
-  list *li=(list*)malloc(sizeof(list));
-  int c=1;
+  int size=count_nodes(head);
+  int *arr1=(int*)malloc(sizeof(int)*size);
+  int count=0;
   priorityQueue *queue=NULL;
   queue=add_prio(queue,get_id(head,src),0);
-    li->id=src;
   while(isNotEmpty(queue)){
       int arr[2];
       queue = pop(queue,arr);
       int id =arr[0];
       node *n=get_id(head,id);
-      if(!contains(li,id)||c){
-          if(c==0){
-          li=add_list(li,id,arr[1]);
-          }
-          c=0;
+      if(!contains(arr1,size,id)){
+          arr1[count]=id;
+          count++;
           if(id==dest){
-              free_li(li);
+              free(arr1);
               free_prio(queue);
               //printf("%d\n",arr[1]);
               return arr[1];
@@ -411,7 +393,7 @@ int djikstra(node *head,int src,int dest){
           }
       }
   }
-  free_li(li);
+  free(arr1);
   free_prio(queue);
   //printf("-1");
   return -1;
