@@ -37,8 +37,7 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    list *tmp=NULL;
-    tmp=l;
+    list *tmp=l;
     while(tmp!=NULL){
         if(tmp->id==id){
             return 1;
@@ -54,8 +53,7 @@ list *add_list(list *l,int id,int weight){
         l->weight=weight;
         return l;
     }
-    list *tmp=NULL;
-    tmp=l;
+    list *tmp=l;
     while(tmp->next!=NULL){
         tmp=tmp->next;
     }
@@ -66,8 +64,7 @@ list *add_list(list *l,int id,int weight){
     return l;
 }
 void free_li(list *l){
-        list *tmp=NULL;
-    tmp=l;
+    list *tmp=l
     while(l!=NULL){
         tmp=l->next;
         free(l);
