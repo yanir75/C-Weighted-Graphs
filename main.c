@@ -67,7 +67,7 @@ list *add_list(list *l,int id,int weight){
 }
 void free_li(list *l){
     if(l!=NULL){
-    list *tmp=l
+    list *tmp=l;
     while(l!=NULL){
         tmp=l->next;
         free(l);
