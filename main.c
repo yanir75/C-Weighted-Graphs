@@ -1,23 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-typedef struct edge{
-    int weight;
-    struct node* dest;
-    struct edge *next_edge;
-}edge;
-
-typedef struct node{
-    int id;
-    struct node *next;
-    edge *edges;
-}node;
-
-typedef struct queue{
-    int prio;
-    node *info;
-    struct queue *next;
-}priorityQueue;
+#include "graph.h"
 
 void print(node *head){
     while(head!=NULL){
