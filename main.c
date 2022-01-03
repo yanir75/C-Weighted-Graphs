@@ -38,15 +38,16 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
-    list *tmp;
-    memset(tmp,0,sizeof(list));
+    list *tmp=(tmp*)malloc(sizeof(list));
+    list *t1=tmp;
     tmp=l;
-    while(tmp){
+    while(tmp!=NULL){
         if(tmp->id==id){
             return 1;
         }
         tmp=tmp->next;
     }
+    free(t1);
     return 0;
 }
 list *add_list(list *l,int id,int weight){
