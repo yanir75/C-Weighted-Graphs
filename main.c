@@ -37,6 +37,10 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
+    if(l==NULL)
+    {
+        return 0;
+    }
     list *tmp=l;
     while(tmp!=NULL){
         if(tmp->id==id){
@@ -385,11 +389,7 @@ int djikstra(node *head,int src,int dest){
       queue = pop(queue,arr);
       int id =arr[0];
       node *n=get_id(head,id);
-      int t=1;
-      #ifdef li
-      t=!contains(li,id);
-      #endif
-      if(t){
+      if(contains(li,id)){
           li=add_list(li,id,arr[1]);
           if(id==dest){
               free_li(li);
