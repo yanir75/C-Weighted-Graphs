@@ -377,7 +377,8 @@ node *delete(node *head ,int id){
 
 
 int djikstra(node *head,int src,int dest){
-  list *li=NULL;
+  list *li=(list*)malloc(sizeof(list));
+  int c=1;
   priorityQueue *queue=NULL;
   queue=add_prio(queue,get_id(head,src),0);
   while(isNotEmpty(queue)){
@@ -385,8 +386,12 @@ int djikstra(node *head,int src,int dest){
       queue = pop(queue,arr);
       int id =arr[0];
       node *n=get_id(head,id);
-      if(!contains(li,id)){
+      list->id=id;
+      if(!contains(li,id)||c){
+          if(c==0){
           li=add_list(li,id,arr[1]);
+          }
+          c=0;
           if(id==dest){
               free_li(li);
               free_prio(queue);
