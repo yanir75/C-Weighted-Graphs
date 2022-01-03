@@ -37,6 +37,10 @@ void print(node *head){
     }
 }
 int contains(list * l,int id){
+    if(l==NULL{
+        return 0;
+    }
+       else{
     list *tmp=l;
     while(tmp!=NULL){
         if(tmp->id==id){
@@ -45,6 +49,7 @@ int contains(list * l,int id){
         tmp=tmp->next;
     }
     return 0;
+       }
 }
 list *add_list(list *l,int id,int weight){
     if(l==NULL){
