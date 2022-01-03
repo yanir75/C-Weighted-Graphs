@@ -368,6 +368,8 @@ int count_nodes(node *head){
 int djikstra(node *head,int src,int dest){
   int size=count_nodes(head);
   int *arr1=(int*)malloc(sizeof(int)*size);
+  for(int i=0;i<size;i++)
+  {arr1[i]=-1;}
   int count=0;
   priorityQueue *queue=NULL;
   queue=add_prio(queue,get_id(head,src),0);
