@@ -19,6 +19,11 @@ typedef struct queue{
     struct queue *next;
 }priorityQueue;
 
+typedef struct list{
+    int id;
+    int weight;
+    struct list *next;
+}list;
 void print(node *head){
     while(head!=NULL){
         printf("Node: %d\n  edges:\n    {",head->id);
@@ -394,6 +399,15 @@ int djikstra(node *head,int src,int dest){
   free_prio(queue);
   //printf("-1");
   return -1;
+}
+int get_list(list *nodes,int num){
+    int i=0;
+    list *tmp=nodes;
+    while(i<num){
+        i++;
+        tmp=tmp->next;
+    }
+    return tmp->id;
 }
 int check_route(node *head,int *arr,int size){
     int sum=0;
