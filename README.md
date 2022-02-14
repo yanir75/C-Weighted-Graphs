@@ -24,6 +24,7 @@ Vertex 1 will have 2 edges, 1 to 3 with weight of 7, 1 to 0 with weight of 2.
 
 4. Shortest path, upon receiving the letter S followed by a pair of vertices, will return the shortest path from the first vertex to the second one.  
   For example the input: S 2 0 will return the shortest path from vertex 2 to 0.
+  We used dijikstra's algorithm.
 
 5. TSP, upon receiving the letter T followed by a number of vertices and the vertices we will return the shortest path that goes through all the given vertices.  
   For example the input: T 3 0 2 5 will return the shortest path that goes through 0 2 5.  
