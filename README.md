@@ -1,6 +1,8 @@
 # C-Graphs
 
-In this project we will receive a directed graph and activates few functions.
+In this project we will receive a directed graph and activates few functions.  
+The graph will be represented as a list of vertices and a list of edges for each vertex.
+I created a structs for priority queue,list,node and edge to complete this task.
 
 1.Graph creations, upon receiving the letter A followed by the number of vertices in a graph.  
 We will start creating a graph in chronological order, every time we would like to work on another vertices we will insert the letter n.   
@@ -26,6 +28,7 @@ Vertex 1 will have 2 edges, 1 to 3 with weight of 7, 1 to 0 with weight of 2.
 5.TSP, upon receiving the letter T followed by a number of vertices and the vertices we will return the shortest path that goes through all the given vertices.  
   For example the input: T 3 0 2 5 will return the shortest path that goes through 0 2 5.  
   This function's complexity is o(n!) n number of vertexes.
+  
 
 ------------
 gcc and make are required.
