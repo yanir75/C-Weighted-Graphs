@@ -3,8 +3,8 @@
 In this project we will receive a directed graph and activates few functions.
 
 1. Graph creations, upon receiving the letter A followed by the number of vertices in a graph.  
-We will start creating a graph in chronological order, every time we would like to work on another vertices we will insert the letter n.  
-We will insert the vertex number, then to add an edge we will enter 2 numbers destination vertex and weight, can be done multiple times.    
+We will start creating a graph in chronological order, every time we would like to work on another vertices we will insert the letter n.   
+We will insert the vertex number, then to add an edge we will enter 2 numbers destination vertex and weight, can be done multiple times.  
 For example this input: A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 will create a graph.  
 4 vertices  
 Vertex 0 will have 2 edges, 0 to 2 with weight of 5 and 0 to 3 with weight of 2.  
