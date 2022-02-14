@@ -39,3 +39,5 @@ make all
 ```
 Run the program
 ```
+./algo.o
+```
