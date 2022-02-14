@@ -1,8 +1,15 @@
 # C-Graphs
 
 In this project we will receive a directed graph and activates few functions.
-  
 
+1. Graph creations, upon receiving the letter A followed by the number of vertices in a graph.  
+We will start creating a graph in chronological order, every time we would like to work on another vertices we will insert the letter n.  
+We will insert the vertex number, then to add an edge we will enter 2 numbers destination vertex and weight, can be done multiple times.    
+For example this input: A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 will create a graph.  
+4 vertices  
+Vertex 0 will have 2 edges, 0 to 2 with weight of 5 and 0 to 3 with weight of 2.  
+Vertex 2 will have 2 edges, 2 to 0 with weight of 4, 2 to 1 with weight of 1.  
+Vertex 1 will have 2 edges, 1 to 3 with weight of 7, 1 to 0 with weight of 2.
 
 2.Adding a vertex, upon receiving the letter B followed by a vertex number and edges (same representation as 1).  
   We will create a new vertex and add it to the graph.  
