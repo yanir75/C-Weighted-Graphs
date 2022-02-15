@@ -35,7 +35,7 @@ Vertex 1 will have 2 edges, 1 to 3 with weight of 7, 1 to 0 with weight of 2.
 gcc and make are required.
 First lets clone the repository
 ```
-git clone https://github.com/yanir75/c-graphs.git
+git clone https://github.com/yanir75/C-Weighted-Graphs.git
 ```
 Use the makefile
 ```
